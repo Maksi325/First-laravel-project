@@ -28,11 +28,11 @@ Route::get('/', function () {
 
 
 
-Route::get('/posts/{post}', function ($slug) {
+Route::get('/posts/{post}', function ($id) {
 
     //Find a post by its slug and pass it to a view called "post"
 
-    $post = Post::find($slug);
+    $post = Post::find($id);
 
     return view('post', [
         'post' => $post
@@ -40,21 +40,3 @@ Route::get('/posts/{post}', function ($slug) {
 
 
 });
-
-
-
-// Route::get('/home', function () {
-//     return view('index');
-// });
-
-// Route::get('/about', function () {
-//     return "Hi this is about us page ";
-// });
-
-// Route::get('/services', function () {
-//     return view('admin.index');
-// });
-
-// Route::get('/contact', function () {
-//     return view('contact');
-// });
