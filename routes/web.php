@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
@@ -16,22 +16,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    $posts = Post::all();
 
-    return view('posts',[
-        'posts' => $posts
+Route::get('/', function () {
+
+    return view('posts', [
+        'posts' => Post::with('category')->get()
     ]);
 });
 
 
-Route::get('/posts/{post}', function (Post $post) {
+Route::get('/category/{categories:slug}', function (Category $categories) {
+    return view('posts', [
+        'posts' => $categories->posts
+    ]);
+});
+
+
+Route::get('/posts/{post:slug}', function (Post $post) {
 
     //Find a post by its id and pass it to a view called "post"
 
     return view('post', [
         'post' => $post
     ]);
-
-
 });
